@@ -180,6 +180,7 @@ class Configuration implements ConfigurationInterface
                         ->scalarNode('base_list_field')->defaultValue('SonataAdminBundle:CRUD:base_list_field.html.twig')->cannotBeEmpty()->end()
                         ->scalarNode('pager_links')->defaultValue('SonataAdminBundle:Pager:links.html.twig')->cannotBeEmpty()->end()
                         ->scalarNode('pager_results')->defaultValue('SonataAdminBundle:Pager:results.html.twig')->cannotBeEmpty()->end()
+                        ->scalarNode('tab_menu_template')->defaultValue('SonataAdminBundle:Core:tab_menu_template.html.twig')->cannotBeEmpty()->end()
                     ->end()
                 ->end()
 
@@ -210,6 +211,7 @@ class Configuration implements ConfigurationInterface
                         ->arrayNode('javascripts')
                             ->defaultValue(array(
                                 'bundles/sonataadmin/vendor/jquery/dist/jquery.min.js',
+                                'bundles/sonataadmin/vendor/jquery.scrollTo/jquery.scrollTo.min.js',
 
                                 'bundles/sonatacore/vendor/moment/min/moment.min.js',
 

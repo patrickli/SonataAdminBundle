@@ -184,7 +184,7 @@
             </trans-unit>
             <trans-unit id="message_delete_confirmation">
                 <source>message_delete_confirmation</source>
-                <target>Are you sure you want to delete the selected element?</target>
+                <target>Are you sure you want to delete the selected "%object%" element?</target>
             </trans-unit>
             <trans-unit id="btn_delete">
                 <source>btn_delete</source>
@@ -389,6 +389,10 @@
             <trans-unit id="add_new_entry">
                 <source>add_new_entry</source>
                 <target>add new entry</target>
+            </trans-unit>
+            <trans-unit id="link_actions">
+                <source>link_actions</source>
+                <target>Actions</target>
             </trans-unit>
         </body>
     </file>

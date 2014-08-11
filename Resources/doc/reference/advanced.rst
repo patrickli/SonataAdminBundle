@@ -20,11 +20,12 @@ router                        router
 validator                     validator
 security_handler              sonata.admin.security.handler
 menu_factory                  knp_menu.factory
-route_builder                 sonata.admin.route.path_info
+route_builder                 sonata.admin.route.path_info | sonata.admin.route.path_info_slashes
 label_translator_strategy     sonata.admin.label.strategy.form_component
 =========================     =============================================
 
-Note: %manager-type% is to be replaced by the manager type (orm, doctrine_mongodb...)
+Note: %manager-type% is to be replaced by the manager type (orm, doctrine_mongodb...),
+and the default route_builder depends on it.
 
 You have 2 ways of defining the dependencies inside ``services.xml``:
 
@@ -209,7 +210,7 @@ Lets consider a base class named `Person` and its subclasses `Student` and `Teac
             </service>
         </services>
 
-You will just need to change the way forms are configured in order to take into account this new subclasses:
+You will just need to change the way forms are configured in order to take into account these new subclasses:
 
 .. code-block:: php
 
@@ -229,3 +230,35 @@ You will just need to change the way forms are configured in order to take into 
             $form->add('year', 'integer');
         }
     }
+
+
+Dropdowns in Tab Menu
+---------------------
+
+You can use dropdowns inside the Tab Menu by default. This can be achieved by using
+the `"dropdown" => true` attribute:
+
+.. code-block:: php
+
+    <?php
+    // YourNS\AdminBundle\Admin\PersonAdmin.php
+
+    protected function configureTabMenu(MenuItemInterface $menu, $action, AdminInterface $childAdmin = null)
+    {
+        // ...other tab menu stuff
+
+        $menu->addChild('comments', array('attributes' => array('dropdown' => true)));
+        $menu['comments']->addChild('list', array('uri' => $admin->generateUrl('listComment', array('id' => $id))));
+        $menu['comments']->addChild('create', array('uri' => $admin->generateUrl('addComment', array('id' => $id))));
+    }
+
+
+If you want to use the Tab Menu in a different way, you can replace the Menu Template:
+
+.. configuration-block::
+
+    .. code-block:: yaml
+
+        sonata_admin:
+            templates:
+                tab_menu_template:  YourNSAdminBundle:Admin:own_tab_menu_template.html.twig

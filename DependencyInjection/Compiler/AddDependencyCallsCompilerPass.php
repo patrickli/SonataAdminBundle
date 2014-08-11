@@ -201,7 +201,8 @@ class AddDependencyCallsCompilerPass implements CompilerPassInterface
             'validator'                 => 'validator',
             'security_handler'          => 'sonata.admin.security.handler',
             'menu_factory'              => 'knp_menu.factory',
-            'route_builder'             => 'sonata.admin.route.path_info',
+            'route_builder'             => 'sonata.admin.route.path_info' .
+                (($manager_type == 'doctrine_phpcr') ? '_slashes' : ''),
             'label_translator_strategy' => 'sonata.admin.label.strategy.native'
         );
 
@@ -299,6 +300,7 @@ class AddDependencyCallsCompilerPass implements CompilerPassInterface
             'base_list_field'          => 'SonataAdminBundle:CRUD:base_list_field.html.twig',
             'pager_links'              => 'SonataAdminBundle:Pager:links.html.twig',
             'pager_results'            => 'SonataAdminBundle:Pager:results.html.twig',
+            'tab_menu_template'        => 'SonataAdminBundle:Core:tab_menu_template.html.twig',
         ), $definedTemplates);
 
         $definition->addMethodCall('setTemplates', array($definedTemplates));
